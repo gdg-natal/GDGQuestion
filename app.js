@@ -18,8 +18,12 @@
 
 	app.controller("SelectCtrl", function($scope, $firebaseArray, $firebaseObject, $localStorage) {
 		var jeffRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Jefferson%20Moura/questions");
-		// var lucRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Lucas%20Miqu%C3%A9ias/questions");
-		var lucRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Hudson%20Brendon/questions");
+		var lucRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Lucas%20Miqu%C3%A9ias/questions");
+		var hudRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Hudson%20Brendon/questions");
+		var bruRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Bruno%20Henrique/questions");
+		var fabRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Fábio%20M%20Costa/questions");
+		var henRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Henri%20Cavalcante/questions");
+		var oziRef = new Firebase("https://io16natal.firebaseio.com/chronogram/Ozifrankly%20Silva/questions");
 
 		var ref = new Firebase("https://quickerpolymer.firebaseio.com/question");
 		var syncObject = $firebaseObject(ref);
@@ -56,6 +60,26 @@
 			{
 				"for": "Lucas Miquéias",
 				"questions": $firebaseArray(lucRef)
+			},
+			{
+				"for": "Hudson Brendon",
+				"questions": $firebaseArray(bruRef)
+			},
+			{
+				"for": "Bruno Henrique",
+				"questions": $firebaseArray(bruRef)
+			},
+			{
+				"for": "Fábio M Costa",
+				"questions": $firebaseArray(fabRef)
+			},
+			{
+				"for": "Henri Cavalcante",
+				"questions": $firebaseArray(henRef)
+			},
+			{
+				"for": "Ozifrankly Silva",
+				"questions": $firebaseArray(oziRef)
 			}
 		];
 		syncObject.$bindTo($scope, "question");
