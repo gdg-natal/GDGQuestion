@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="questions">
+<head>
+	<meta charset="UTF-8">
+	<title>Selecionador</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-controller="SelectCtrl">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					Selecionador de perguntas
+				</a>
+			</div>
+			<div class="navbar-form navbar-left">
+				<button type="button" ng-click="next()" class="btn btn-primary">Próxima pergunta</button>
+			</div>
+		</div>
+	</nav>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-8">
+			<div ng-repeat="question in questions">
+				<div class="panel panel-default">
+					<div class="panel-heading">{{question.for}}</div>
+					<table class="table" ng-show="question.questions.length > 0">
+						<th>
+							<tr>
+								<td>Nome</td>
+								<td>Pergunta</td>
+								<td>Aceitar ?</td>
+							</tr>
+						</th>
+						<tb>
+							<tr ng-repeat="q in question.questions">
+								<td>{{q.sender}}</td>
+								<td>{{q.question}}</td>
+								<td>
+									<button type="button" ng-if="!q.added" ng-click="push(q)" class="btn btn-success">Aceitar</button>
+									<button type="button" ng-if="q.added" disabled class="btn btn-success">Aceitar</button>
+								</td>
+							</tr>
+						</tb>
+					</table>
+				</div>
+				<div class="alert alert-warning" role="alert" ng-hide="question.questions.length > 0">
+					Não há perguntas para {{question.for}}
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Perguntas na sequencia</div>
+				<table class="table" ng-show="selectedQuestions.length > 0">
+					<th>
+						<tr>
+							<td>#</td>
+							<td>Nome</td>
+							<td>Pergunta</td>
+							<td>Lida</td>
+						</tr>
+					</th>
+					<tb>
+						<tr ng-repeat="q in selectedQuestions">
+							<td>{{$index + 1}}</td>
+							<td>{{q.sender}}</td>
+							<td>{{q.question | limitTo: 7}}...</td>
+							<td>
+								<span ng-if="q.read" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+								<span ng-if="!q.read" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</td>
+						</tr>
+					</tb>
+				</table>
+			</div>
+			<div class="alert alert-warning" role="alert" ng-hide="selectedQuestions.length > 0">
+				Nenhuma pergunta selecionada
+			</div>
+		</div>
+	</div>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+	<!-- NG-LocalStorage  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+	<!-- Application -->
+	<script src="app.js"></script>
+</body>
+</html>

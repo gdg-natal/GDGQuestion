@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="questions">
+<head>
+	<meta charset="UTF-8">
+	<title>Questions</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+	<link rel="stylesheet" href="animations.css">
+</head>
+<body ng-controller="MainCtrl">
+	<div class="anim">
+	</div>
+	<script src="Anim.js" charset="utf-8"></script>
+	<script>
+		var container = document.querySelector(".anim");
+		var anim = new Anim(container, ["#2196F3", "#F9A825"]);
+		anim.init();
+		anim.next('<h3>Perguntas</h3>');
+	</script>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+	<!-- NG-LocalStorage  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+	<!-- Application -->
+	<script src="app.js"></script>
+
+</body>
+</html>
