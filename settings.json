@@ -1,0 +1,10 @@
+{
+	"firebaseURL": "https://gdgquestion.firebaseio.com",
+	"apiKey": "AIzaSyBwgRfUFbwsai7aipPQaCokoCD0CPZzA2Y",
+	"appDomain": "gdgquestion.firebaseapp.com",
+	"admin": {
+		"email": "jefinho.moura14@gmail.com",
+		"password": "J3Fire@jeff"
+	},
+	"people": ["Jefferson Moura"]
+}

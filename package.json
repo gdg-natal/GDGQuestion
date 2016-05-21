@@ -1,0 +1,31 @@
+{
+  "name": "gdgquestion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "configurator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdg-natal/GDGQuestion.git"
+  },
+  "keywords": [
+    "questions",
+    "gdg",
+    "questions",
+    "gdg",
+    "gdgquestions"
+  ],
+  "author": "jeffersonmourak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gdg-natal/GDGQuestion/issues"
+  },
+  "homepage": "https://github.com/gdg-natal/GDGQuestion#readme",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "firebase": "^3.0.2"
+  }
+}
