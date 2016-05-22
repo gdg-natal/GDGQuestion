@@ -7,49 +7,26 @@
 	var people = db.ref("people");
 	var question = db.ref("question");
 
-	app.controller("MainCtrl", function($scope) {
+	app.controller("MainCtrl", MainCtrl);
+
+	app.controller("SelectCtrl", SelectCtrl);
+
+	app.controller("AskCtrl", AskCtrl);
+
+	function MainCtrl ($scope) {
 		question.on("value", function(snapshot){
 			anim.next('<h3>' + snapshot.val().sender + '</h3><p>' + snapshot.val().question + '</p>')
 		})
-	});
+	}
 
-	app.controller("SelectCtrl", function($scope, $localStorage) {
+	function SelectCtrl ($scope, $localStorage) {
 
 		$scope.questions = [];
-
-		function isIn(array, value){
-			for(let i in array){
-				let item = array[i]
-				if(item.for === value){
-					return i;
-				}
-			}
-			return false;
-		}
-
-		function arraynizer(object, key){
-			if(key === undefined){
-				key = false;
-			}
-			var array = [];
-			for(var i in object){
-				if(key){
-					array.push({
-						value: i,
-						data: object[i]
-					});
-				}
-				else{
-					array.push(object[i]);
-				}
-			}
-			return array;
-		}
 
 		people.on("value", function(snapshot){
 			var data = snapshot.val();
 			for(var i in data){
-				let inside = isIn($scope.questions, data[i].name);
+				let inside = isIn($scope.questions, "for",data[i].name);
 				if(inside === false){
 					$scope.questions.push({for: data[i].name, questions: arraynizer(data[i].questions)});
 				}
@@ -68,21 +45,12 @@
 			$scope.question = snapshot.val();
 		})
 
-		function In(id){
-			for(var i = 0; i < $scope.selectedQuestions.length; i++){
-				if($scope.selectedQuestions[i].$$hashKey === id){
-					return i;
-				}
-			}
-			return false
-		}
-
 		$scope.selectedQuestions = [];
 		var i = 0;
 		$scope.push = function (q){
 			q.read = false;
 			q.added = true;
-			if(In(q.$$hashKey) === false){
+			if(isIn($scope.selectedQuestions, "$$hashKey" ,q.$$hashKey) === false){
 				$scope.selectedQuestions.push(q);
 			}
 		}
@@ -106,6 +74,40 @@
 				i++;
 			}
 		}
-	});
+	}
+
+	function AskCtrl ($scope){
+		$scope.People = [];
+		var p = [];
+		people.on("value", function(snapshot){
+			var data = snapshot.val();
+			for(var i in data){
+				let inside = isIn($scope.People, "for",data[i].name);
+				if(inside === false){
+					$scope.People.push({for: data[i].name, questions: arraynizer(data[i].questions)});
+					p.push({for: data[i].name, questions: arraynizer(data[i].questions)});
+				}
+				else{
+					$scope.People[inside] = {for: data[i].name, questions: arraynizer(data[i].questions)};
+					p[inside] = {for: data[i].name, questions: arraynizer(data[i].questions)};
+				}
+			}
+			try {
+				$scope.$apply();
+			} catch (e) {
+				console.log(e);
+			}
+		});
+
+		$scope.send = function(){
+			var data = JSON.parse($scope.askFor);
+			var questions = data.questions || [];
+			var index = isIn($scope.People, "for",data.for);
+			people.child(index + "/questions/"+questions.length).set({"sender": $scope.question.sender, "question": $scope.question.question});
+		}
+
+	}
+
+
 
 }())

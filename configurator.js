@@ -47,6 +47,10 @@
 		res.render("select", authData);
 	});
 
+	app.get("/ask", (req, res)=>{
+		res.render("ask", authData);
+	});
+
 	console.log("Starting Server");
 	app.use('/static', express.static(__dirname + "/app/static"));
 	http.listen(3000, ()=>{

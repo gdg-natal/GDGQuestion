@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="questions">
+<head>
+	<meta charset="UTF-8">
+	<title>Selecionador</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-controller="AskCtrl">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					Perguntas
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="col-md-8 col-md-offset-2">
+		<p>Selecione alguém para perguntar</p>
+		<select ng-model="askFor">
+			<option ng-repeat="person in People" value="{{person}}">{{person.for}}</option>
+		</select>
+
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Seu nome" ng-model="question.sender" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Sua pergunta" ng-model="question.question" aria-describedby="basic-addon2">
+		</div>
+		<button type="button" ng-click="send()" class="btn btn-primary">Enviar</button>
+
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "<%= apiKey %>",
+	    authDomain: "<%= appDomain %>",
+	    databaseURL: "<%= firebaseURL %>",
+	    storageBucket: "",
+	  };
+	  firebase.initializeApp(config);
+		firebase.auth().signInWithEmailAndPassword("<%= admin.email %>", "<%= admin.password %>");
+	</script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<!-- NG-LocalStorage  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+	<!-- Application -->
+	<script src="/static/lib.js"></script>
+	<script src="/static/app.js"></script>
+</body>
+</html>
